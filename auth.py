@@ -16,3 +16,10 @@ def login():
             return "not login"
     else:
         return render_template("login.html")
+
+@auth_bp.route("/create",methods=['GET','POST'])
+def create():
+    if request.method == "POST":
+        pass
+    else:
+        return render_template("create.html")
