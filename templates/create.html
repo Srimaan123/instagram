@@ -4,6 +4,7 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>create</title>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.8.1/socket.io.js" integrity="sha512-8BHxHDLsOHx+flIrQ0DrZcea7MkHqRU5GbTHmbdzMRnAaoCIkZ97PqZcXJkKZckMMhqfoeaJE+DNUVuyoQsO3Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 	<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -12,7 +13,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <style>
     	@media(max-width: 500px){
-    		.main{
+    		.sub{
     			width: 100%;
     		}
     		h1{
@@ -25,15 +26,36 @@
     			padding: 0.5rem;
     		}
     	}
+    	@media(min-width: 500px){
+    		.sub{
+    			width: 80%;
+    			height: 100%;
+    		}
+    	}
     </style>
 </head>
-<body class="flex justify-center w-full">
-	<div class="main w-[80%] border-2 border-gray-200 rounded-xl flex flex-col items-center min-h-dvh">
-		<div class="header p-2 w-full">
-			<i class="fas fa-angle-left p-4 text-xl rounded-full hover:bg-gray-200/60"></i>
+<body>
+	<div class="main flex w-full min-h-dvh items-center justify-center">
+		<div class="sub border-2 border-gray-200 rounded-xl inline-block p-4">
+			<i class="fab fa-instagram text-5xl mb-4 bg-gradient-to-r from-red-400 via-orange-500 to pink-500 bg-clip-text text-transparent"></i>
+			<div class="inputs w-full flex flex-col gap-4">
+				<div class="input flex gap-2 flex-col">
+					<p class="font-['Fredoka'] font-[400]"><i class="fas fa-circle-info text-[#0064e0]"></i> Enter a prominent and correct mobile number <span class="text-gray-400">eg: 1234567890</span></p>
+					<input type="text" name="mobile_number" class="mobile_number p-4 text-black outline-none border-2 border-gray-200 rounded-xl placeholder-gray-500 w-full" placeholder="Mobile number">
+				</div>
+				<div class="input flex gap-2 flex-col">
+					<p class="font-['Fredoka'] font-[400]"><i class="fas fa-circle-info text-[#0064e0] "></i> Username should not contain special characters <span class="text-gray-400">eg: @,!,#,$,%,&,*</span></p>
+					<input type="text" name="username" class="username p-4 text-black outline-none border-2 border-gray-200 rounded-xl placeholder-gray-500 w-full" placeholder="username">
+				</div>
+				<div class="input flex gap-2 flex-col">
+					<p class="font-['Fredoka'] font-[400]"><i class="fas fa-circle-info text-[#0064e0]"></i> Password should be atleast 8 characters long</p>
+					<input type="text" name="password" class="password p-4 text-black outline-none border-2 border-gray-200 rounded-xl placeholder-gray-500 w-full" placeholder="password">
+				</div>
+				<button class="border-2 border-[#0064e0] rounded-full p-2 w-full text-[#0064e0]">Create account</button>
+				<a href="/" class="text-[#0064e0]">Already have an account? Go to login page</a>
+			</div>
 		</div>
-		<h1 class="text-3xl text-black font-['Inter'] w-full font-medium mb-4">What's your mobile number?</h1>
-		<p class="text-xl">Enter the mobile number on which you can be contacted.No one will see this on your profile.</p>
 	</div>
+	<script src="../static/create.js"></script>
 </body>
 </html>
