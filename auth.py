@@ -12,7 +12,7 @@ def login():
         with sqlite3.connect('data.db') as conn:
             user = conn.cursor().execute("select * from users where username=? and password=?",(username,password)).fetchone()
         if user:
-            return "login"
+            return redirect(f"/main/{username}")
         else:
             return "not login"
     else:
