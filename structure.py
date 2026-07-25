@@ -14,4 +14,12 @@ def init_db():
 			)
 		""")
 
+		cursor.execute("""
+		create table if not exists requests(
+			requested_by text,
+			requested_to text,
+			is_accepted text,
+			is_rejected text) 
+		""")
+
 		conn.commit()
