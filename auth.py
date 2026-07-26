@@ -38,6 +38,6 @@ def init_auth_socket(socketio):
                 emit("user_already_exists",{"username": username})
                 return
             else:
-                cursor.execute("insert into users(username,password,mobile_number,is_private) values(?,?,?,?)",(username,password,mobile_number,'True'))
+                cursor.execute("insert into users(username,password,mobile_number,is_private) values(?,?,?,?)",(username,password,mobile_number,'False'))
                 conn.commit()
         emit("user_added",{"username": username})
