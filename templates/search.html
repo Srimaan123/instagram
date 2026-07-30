@@ -70,7 +70,7 @@
     <div class="main w-full min-h-dvh bg-[var(--bg-color)]">
         <div class="header flex items-center justify-between p-2 border-b border-gray-200">
             <i class="fab fa-instagram text-3xl"></i>
-            <i class="fas fa-heart text-2xl text-red-400 hover:text-red-300"></i>
+            <i class="fas fa-heart text-2xl text-red-400 hover:text-red-300" onclick="document.location.href = `/notifications/${document.querySelector('#username').textContent}`"></i>
         </div>
         <div class="content grow">
             <div class="input flex flex-col items-center p-2">
@@ -89,7 +89,7 @@
                 <i class="fab fa-instagram text-5xl "></i>
             </div>
             <div class="icons flex flex-col gap-4 pl-4 pr-4">
-                <i class="hide fas fa-heart text-red-400 text-2xl"></i>
+                <i class="hide fas fa-heart text-red-400 text-2xl" onclick="document.location.href = `/notifications/${document.querySelector('#username').textContent}`"></i>
                 <i class="far fa-plus text-2xl"></i>
                 <i class="fas fa-paper-plane text-2xl"></i>
                 <i class="fas fa-home text-2xl"></i>

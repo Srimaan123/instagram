@@ -19,7 +19,8 @@ def init_db():
 			requested_by text,
 			requested_to text,
 			is_accepted text,
-			is_rejected text) 
+			is_rejected text,
+			is_seen text) 
 		""")
 
 		conn.commit()

@@ -52,12 +52,12 @@ def search_for_user(socketio):
         with sqlite3.connect("data.db") as conn:
             cursor = conn.cursor()
             is_private = cursor.execute("select is_private from users where username=?",(requested_to,)).fetchone()
-            if is_private:
-                cursor.execute("insert into requests(requested_by,requested_to,is_accepted,is_rejected) values(?,?,'False','False')",(requested_by,requested_to))
-                socketio.emit("followed",{"requested_to": requested_to})
-            else:
-                cursor.execute("insert into requests(requested_by,requested_to,is_accepted,is_rejected) values(?,?,'True','False')",(requested_by,requested_to))
+            if is_private == 'True':
+                cursor.execute("insert into requests(requested_by,requested_to,is_accepted,is_rejected,is_seen) values(?,?,'False','False','False')",(requested_by,requested_to))
                 socketio.emit("requested",{"requested_to": requested_to})
+            else:
+                cursor.execute("insert into requests(requested_by,requested_to,is_accepted,is_rejected,is_seen) values(?,?,'True','False','False')",(requested_by,requested_to))
+                socketio.emit("followed",{"requested_to": requested_to})
             conn.commit()
     @socketio.on("delete_request")
     def unfollow_delete(data):
