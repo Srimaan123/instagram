@@ -65,7 +65,15 @@
                     <p class="text-lg text-gray-500">something is better than nothing</p>
                 </div>
             </div>
-            
+            <div class="settings p-2 border-2 border-gray-200 rounded-xl ">
+                <div class="setting flex justify-between items-center">
+                    <p class="text-xl text-black text-bold">Account Type</p>
+                    <select name="AccType" id="AccType" class="border border-gray-200 p-2 rounded-xl">
+                        <option value="" class="">{{ accountType[0] }}</option>
+                        <option value="" class="">{{ accountType[1] }}</option>
+                    </select>
+                </div>
+            </div>
         </div>
         <div class="navigation flex flex-col items-center">
             <div class="icon grow">
