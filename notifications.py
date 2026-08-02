@@ -19,7 +19,7 @@ def show_notifications(username):
                 if request[0] == username:
                     
                     if request[2] == 'True':
-                        if is_private == 'True':
+                        if is_private == 'False':
                             following.append(request[1])
                         else:
                             follow_requests.append(request[1])

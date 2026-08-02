@@ -8,7 +8,7 @@ settings_bp = Blueprint("settings",__name__)
 def settings(username):
     with sqlite3.connect("data.db") as conn:
         cursor = conn.cursor()
-        is_private = cursor.execute("select is_private from users where username=?",(username,)).fetchone()
+        is_private = cursor.execute("select is_private from users where username=?",(username,)).fetchone()[0]
     accountType = []
     if is_private == 'True':
         accountType.append('Private')
@@ -19,3 +19,18 @@ def settings(username):
         
     return render_template("settings.html",username=username,accountType=accountType)
 
+def settings_api(socketio):
+    @socketio.on("changeAccountType")
+    def changeAccountType(data):
+        username = data.get("username")
+        account_type = data.get("accType")
+        print(account_type)
+        if account_type == "Private":
+            account_type = 'True'
+        else:
+            account_type = 'False'
+
+        with sqlite3.connect('data.db') as conn:
+            cur = conn.cursor()
+            cur.execute("update users set is_private=? where username=?",(account_type,username))
+            conn.commit()

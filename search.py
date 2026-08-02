@@ -51,7 +51,7 @@ def search_for_user(socketio):
         print(requested_to)
         with sqlite3.connect("data.db") as conn:
             cursor = conn.cursor()
-            is_private = cursor.execute("select is_private from users where username=?",(requested_to,)).fetchone()
+            is_private = cursor.execute("select is_private from users where username=?",(requested_to,)).fetchone()[0]
             if is_private == 'True':
                 cursor.execute("insert into requests(requested_by,requested_to,is_accepted,is_rejected,is_seen) values(?,?,'False','False','False')",(requested_by,requested_to))
                 socketio.emit("requested",{"requested_to": requested_to})
