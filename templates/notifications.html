@@ -15,29 +15,30 @@
 <body>
     <p id="username" style="display: none;">{{ username }}</p>
     <div class="main w-full min-w-dvh">
-        <div class="header p-2 flex">
+        <div class="header p-2 flex items-center">
             <i class="fas fa-angle-left text-2xl text-black" onclick="window.location.href = `/main/${document.querySelector('#username').textContent}`"></i>
             <h1 class="text-xl font-['inter'] grow text-center font-bold">Notifications</h1>
         </div>
         <div class="content p-2">
-            <div class="following border-b-2 border-gray-200 p-2">
-                {% for request in all_requests.follow_requests %}
-                <div class="request">
-                    <img src="pic" alt="" class="w-[length:var(--story)] h-[length:var(--story)] bg-black rounded-full">
-                </div>
-                {% endfor %}
-            </div>
-            <div class="following border-b-2 border-gray-200 p-2">
-                {% for follower in all_requests.following %}
-                <div class="follower flex gap-4 items-center">
-                    <img src="" alt="" class="h-12 w-12 bg-black rounded-full">
-                    <p class="text-black"><span class="text-black font-bold">{{ follower }}</span> started following you</p>
-                </div>
-                {% endfor %}
-            </div>
             
-        {{all_requests.follow_requests}}
-        {{all_requests.accepted_requests}}
+            <div class="following border-b-2 border-gray-200 flex flex-col gap-4">
+                {% for follower in all_requests.following %}
+                <div class="follower flex gap-4 items-center m-2">
+                    <img src="" alt="" class="h-12 w-12 bg-black rounded-full">
+                    <p class="text-black"><span class="text-black font-bold">{{ follower[1] }}</span> started following you</p>
+                </div>
+                {% endfor %}
+            </div>
+            {{ all_requests.follow_requests}}
+            <div class="follow_requests">
+                {% for follow in all_requests.follow_requests %}
+                <div class="follow_request">
+                    <img src="" alt="" class="w-[length:var(--story)] h-[length:var(--story)] bg-black rounded-full">
+                    <h1 class="text-xl text-black font-md"><span class="font-bold">{{ follow[1] }}</span> requested you to follow</h1>
+                    <p style='display: none;' class="id">{{ follow[0] }}</p>
+                </div>
+                {% endfor %}
+            </div>
         </div>
     </div>
     <script src="../static/notifications.js"></script>

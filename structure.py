@@ -16,6 +16,7 @@ def init_db():
 
 		cursor.execute("""
 		create table if not exists requests(
+			id INTEGER PRIMARY KEY AUTOINCREMENT,
 			requested_by text,
 			requested_to text,
 			is_accepted text,

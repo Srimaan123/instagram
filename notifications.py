@@ -9,25 +9,24 @@ def show_notifications(username):
     with sqlite3.connect("data.db") as conn:
         cursor = conn.cursor()
         requests_of_user = cursor.execute("select * from requests where requested_by=? or requested_to=?",(username,username)).fetchall()
-        is_private = cursor.execute("select is_private from users where username=?",(username,)).fetchone()[0]
+        
         follow_requests = []
         rejected_requests = []
         accepted_requests = []
         following = []
         for request in requests_of_user:
+            id = request[0]
             if request[-1] != 'True':
-                if request[0] == username:
-                    
-                    if request[2] == 'True':
-                        if is_private == 'False':
-                            following.append(request[1])
-                        else:
-                            follow_requests.append(request[1])
-                    elif request[3] == 'True':
-                        rejected_requests.append(request[1])
-                elif request[1] == username:
-                    if request[2] == 'True':
-                        accepted_requests.append(request[0])
+                if request[1] == username:
+                    if request[3] == 'True':
+                        accepted_requests.append((id,request[2]))
+                    if request[4] == 'False':
+                        rejected_requests.append((id,request[2]))
+                else:
+                    if request[3] == 'True':
+                        following.append((id,request[1]))
+                    else:
+                        follow_requests.append((id,request[1]))
                     
         all_requests = {
             "accepted_requests": accepted_requests,
