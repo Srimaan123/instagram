@@ -91,8 +91,8 @@
             <div class="icons flex flex-col gap-4 pl-4 pr-4">
                 <i class="hide fas fa-heart text-red-400 text-2xl" onclick="document.location.href = `/notifications/${document.querySelector('#username').textContent}`"></i>
                 <i class="far fa-plus text-2xl"></i>
-                <i class="fas fa-paper-plane text-2xl"></i>
-                <i class="fas fa-home text-2xl"></i>
+                <i class="fas fa-paper-plane text-2xl" onclick="document.location.href = `/chats/${document.querySelector('#username').textContent}`"></i>
+                <i class="fas fa-home text-2xl" onclick="document.location.href = `/main/${document.querySelector('#username').textContent}`"></i>
             </div>
             <div class="hide grow flex flex-col justify-end gap-4 pb-4">
                 <i class="fas fa-bars text-2xl"></i>

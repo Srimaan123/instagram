@@ -1,6 +1,6 @@
 from flask import Blueprint,render_template,redirect
 import sqlite3
-
+from flask_socketio import emit
 
 notifications_bp = Blueprint("notifications",__name__)
 
@@ -35,3 +35,15 @@ def show_notifications(username):
             'following': following
         }
     return render_template("notifications.html",username=username,all_requests=all_requests)
+
+def notifications_api(socketio):
+    @socketio.on("accept_request")
+    def accept_request(data):
+        accepted_by = data.get("accepted_by")
+        accepted_to = data.get('accepted_to')
+
+        with sqlite3.connect('data.db') as conn :
+            cursor = conn.cursor()
+            cursor.execute("update requests set is_accepted='True' where requested_by=? and requested_to=?",(accepted_to,accepted_by))
+            conn.commit()
+        emit("reload")

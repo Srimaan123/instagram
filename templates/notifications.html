@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Notifications</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.8.1/socket.io.js" integrity="sha512-8BHxHDLsOHx+flIrQ0DrZcea7MkHqRU5GbTHmbdzMRnAaoCIkZ97PqZcXJkKZckMMhqfoeaJE+DNUVuyoQsO3Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -23,19 +24,31 @@
             
             <div class="following border-b-2 border-gray-200 flex flex-col gap-4">
                 {% for follower in all_requests.following %}
-                <div class="follower flex gap-4 items-center m-2">
+                <div class="follower flex gap-4 items-center p-4">
                     <img src="" alt="" class="h-12 w-12 bg-black rounded-full">
-                    <p class="text-black"><span class="text-black font-bold">{{ follower[1] }}</span> started following you</p>
+                    <p class="text-black text-xl"><span class="text-black font-bold">{{ follower[1] }}</span> started following you</p>
                 </div>
                 {% endfor %}
             </div>
-            {{ all_requests.follow_requests}}
-            <div class="follow_requests">
+            
+            <div class="follow_requests border-b-2 border-gray-200 ">
                 {% for follow in all_requests.follow_requests %}
-                <div class="follow_request">
-                    <img src="" alt="" class="w-[length:var(--story)] h-[length:var(--story)] bg-black rounded-full">
-                    <h1 class="text-xl text-black font-md"><span class="font-bold">{{ follow[1] }}</span> requested you to follow</h1>
+                <div class="follow_request flex gap-2 align-center m-2 ml-4">
+                    <img src="" alt="" class="w-12 h-12 bg-black rounded-full">
+                    <h1 class="text-xl text-black font-md mt-2 mb-2 h-full"><span class="name font-bold">{{ follow[1] }}</span> requested you to follow</h1>
                     <p style='display: none;' class="id">{{ follow[0] }}</p>
+                    <div class="wrap p-2 absolute right-0 flex gap-2">
+                        <button class="accept font-md bg-[var(--insta-blue)] p-2 text-white rounded-xl">accept</button>
+                        <button class="reject font-md p-2 bg-red-500 text-white rounded-xl">reject</button>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            <div class="accepted_requests border-b-2 border-gray-200">
+                {% for request in all_requests.accepted_requests %}
+                <div class="accepted_request flex gap-4 p-4">
+                    <img src="" alt="" class="bg-black h-12 w-12 rounded-full">
+                    <h1 class="text-xl text-black mt-2"><span class="font-bold">{{ request[1] }}</span> accepted your request</h1>
                 </div>
                 {% endfor %}
             </div>
