@@ -29,3 +29,8 @@ sendBtn.addEventListener("click", () => {
         "message": document.querySelector(".input").value
     })
 })
+
+function add_message(text, sender) {
+    let div = document.createElement("div")
+    div.setAttribute("class", "")
+}
