@@ -26,7 +26,6 @@ def settings_api(socketio):
     def changeAccountType(data):
         username = data.get("username")
         account_type = data.get("accType")
-        print(account_type)
         if account_type == "Private":
             account_type = 'True'
         else:

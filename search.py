@@ -16,7 +16,7 @@ def search_for_user(socketio):
             cursor = conn.cursor()
             users = cursor.execute("select username from users where username like ?",(text,)).fetchone()
             request_from_user = cursor.execute("select * from requests where requested_by=?",(username,)).fetchall()
-            print(request_from_user)
+            
             is_requested = []
             is_followed = []
             is_rejected = []
@@ -25,21 +25,19 @@ def search_for_user(socketio):
                     is_requested.append('False')
                 for j in request_from_user:
                     if i in j:
-                        is_requested.append("True")
-                    
+                        is_requested.append("True")     
                     else:
                         is_requested.append("False")
-                    if i == j[0] and j[2] == 'True':
+                    if i == j[2] and j[3] == 'True':
                         is_followed.append('True')
                     else:
                         is_followed.append('False')
-                    if i == j[0] and j[3] == 'True':
+                    if i == j[2] and j[4] == 'True':
                         is_rejected.append('True')
                     else:
                         is_rejected.append('False')
-
+            
             if users:
-                
                 emit("search_result",{"users": users,
                                       "is_requested": is_requested,
                                       "is_followed": is_followed,
@@ -48,7 +46,6 @@ def search_for_user(socketio):
     def request_or_follow(data):
         requested_by = data.get("requested_by")
         requested_to = data.get("requested_to")
-        print(requested_to)
         with sqlite3.connect("data.db") as conn:
             cursor = conn.cursor()
             is_private = cursor.execute("select is_private from users where username=?",(requested_to,)).fetchone()[0]
