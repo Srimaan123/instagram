@@ -28,8 +28,9 @@ def show_chats(code):
         cur = conn.cursor()
         sender_id = cur.execute("select id from users where username=?",(sender,)).fetchone()[0]
         receiver_id = cur.execute("select id from users where username=?",(receiver,)).fetchone()[0]
-
-    return render_template("chat.html",sender=sender,receiver=receiver,sender_id=sender_id,receiver_id=receiver_id)
+        chats = cur.execute("select * from chats where (sender=? and receiver=?) or (sender=? and receiver=?)",(sender,receiver,receiver,sender)).fetchall()
+        print(chats)
+    return render_template("chat.html",sender=sender,receiver=receiver,sender_id=sender_id,receiver_id=receiver_id,chats=chats)
 
 def chats_api(socketio):
     @socketio.on("search_account")
@@ -58,7 +59,7 @@ def chats_api(socketio):
         room_code = f'{max(sender_id,receiver_id)}-{min(sender_id,receiver_id)}'
         join_room(room=room_code)
         emit("room_joined",room=room_code)
-        print("JOINED THE ROOM")
+
 
     @socketio.on("send_message")
     def send_the_message_and_store(data):
@@ -69,7 +70,7 @@ def chats_api(socketio):
 
         with sqlite3.connect("data.db") as conn:
             cursor = conn.cursor()
-            cursor.execute("insert into chats(id,message,sender,receiver,is_seen,is_deleted) values(?,?,?,?,'False','False')",(message,sender,receiver))
+            cursor.execute("insert into chats(message,sender,receiver,is_seen,is_deleted) values(?,?,?,'False','False')",(message,sender,receiver))
             conn.commit()
 
         emit("receive_message",{

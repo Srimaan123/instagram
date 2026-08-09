@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,62 +9,83 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+        integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="../fontawesome-free-7.3.1-web/css/all.brands.css">
+    <link rel="stylesheet" href="../static/styles.css">
+
     <style>
-        @media(max-width: 700px){
-            .sub{
+        @media(max-width: 700px) {
+            .sub {
                 width: 100%;
                 height: 100dvh;
                 border: none;
             }
-            img{
+
+            img {
                 display: none;
             }
         }
-        @media(max-height: 400px){
-            .sub{
+
+        @media(max-height: 400px) {
+            .sub {
                 width: 100%;
                 height: 100dvh;
                 border: none;
 
             }
-            img{
+
+            img {
                 display: none;
             }
         }
-        @media(min-width: 700px){
-            .sub{
+
+        @media(min-width: 700px) {
+            .sub {
                 background: white;
                 height: 100%;
                 width: 50%;
                 border: 2px;
             }
-            img{
+
+            img {
                 display: flex;
             }
         }
     </style>
 
 </head>
+
 <body>
     <div class="main w-full min-h-dvh flex items-center justify-center">
-        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQxbhTqtvrsEDDc1PIzGq37Uunkn3nQEO3p5CsgfOYI9A&s=10" class="w-[50%] h-dvh p-2 border-gray-200 border-2 rounded-xl">
-        <form class="sub border-2 inline-block p-4 border-gray-200 bg-[#fafafa] rounded-xl flex flex-col items-center pb-4 w-[90%] h-[90%]" action="/" method="post">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQxbhTqtvrsEDDc1PIzGq37Uunkn3nQEO3p5CsgfOYI9A&s=10"
+            class="w-[50%] h-dvh p-2 border-gray-200 border-2 rounded-xl">
+        <form
+            class="sub border-2 inline-block p-4 border-gray-200 bg-[#fafafa] rounded-xl flex flex-col items-center pb-4 w-[90%] h-[90%]"
+            action="/" method="post">
             <div class="mx-auto flex items-center justify-center w-20 h-20 rounded-3xl m-4">
-                <i class="fa-brands fa-instagram bg-gradient-to-tr from-[#ffcc00] via-[#ff0066] to-[#0026ff] bg-clip-text text-transparent text-7xl"></i>
+                <i
+                    class="fa-brands fa-instagram bg-gradient-to-tr from-[#ffcc00] via-[#ff0066] to-[#0026ff] bg-clip-text text-transparent text-7xl"></i>
             </div>
             <div class="inputs p-2 flex flex-col items-center gap-4">
-                <input type="text" name="username" placeholder="Username" class="p-4 border-2 w-full border-gray-200 rounded-xl font-['fredoka'] text-black placeholder-gray-500">
-                <input type="password" name="password" placeholder="password" class="p-4 border-2 w-full border-gray-200 rounded-xl font-['fredoka'] text-black placeholder-gray-500">
+                <input type="text" name="username" placeholder="Username"
+                    class="p-4 border-2 w-full border-gray-200 rounded-xl font-['fredoka'] text-black placeholder-gray-500">
+                <input type="password" name="password" placeholder="password"
+                    class="p-4 border-2 w-full border-gray-200 rounded-xl font-['fredoka'] text-black placeholder-gray-500">
                 <button class="bg-[#0064e0] w-full rounded-full p-2 text-white hover:bg-[#004db3]">Log in</button>
             </div>
             <div class="flex flex-col items-center m-2">
                 <a href="#" class="font-medium font-['inter'] hover:bg-gray-200/40 p-2">Forgotten password?</a>
             </div>
-            <a class="text-[#0064e0] border border-[#0064e0] p-2 rounded-full w-full inline-block text-center mt-8" href="/create">Create new account</a>
+            <a class="text-[#0064e0] border border-[#0064e0] p-2 rounded-full w-full inline-block text-center mt-8"
+                href="/create">Create new account</a>
         </form>
     </div>
-    
+
 </body>
+
 </html>

@@ -1,5 +1,6 @@
 let socketio = io();
 let main = document.querySelector(".main")
+let content = document.querySelector(".content")
 
 socketio.on("connect", () => {
     console.log("connected!!")
@@ -7,8 +8,8 @@ socketio.on("connect", () => {
 })
 
 socketio.emit("join-room", {
-    sender_id: document.querySelector("#sender").textContent,
-    receiver_id: document.querySelector("#receiver").textContent
+    sender_id: document.querySelector("#sender-id").textContent,
+    receiver_id: document.querySelector("#receiver-id").textContent
 })
 
 socketio.on("joined_room", (data) => {
@@ -23,14 +24,29 @@ let sendBtn = document.querySelector(".sendBtn")
 let input = document.querySelector("#input")
 sendBtn.addEventListener("click", () => {
     socketio.emit("send_message", {
-        room_id: document.querySelector("#room_id").textContent,
-        sender: document.querySelector("#username").textContent,
+        sender: document.querySelector("#sender").textContent,
         receiver: document.querySelector("#receiver").textContent,
-        "message": document.querySelector(".input").value
+        "message": document.querySelector("#input").value,
+        "room_id": document.querySelector("#room_id")
     })
 })
 
 function add_message(text, sender) {
     let div = document.createElement("div")
-    div.setAttribute("class", "")
+    let p = document.createElement("p")
+    if (document.querySelector("#sender").textContent == sender) {
+        div.setAttribute("class", "bg-[var(--chat-bubble)] rounded-full p-2")
+        p.setAttribute("class", "text-white text-[500]")
+    }
+    else {
+        div.setAttribute("class", "bg-gray-200 rounded-full p-2")
+        p.setAttribute("class", "text-black text-[500]")
+    }
+    p.textContent = text
+    div.append(p)
+    content.append(div)
 }
+
+socketio.on("receive_message", (data) => {
+    add_message(data.message, data.sender)
+})
