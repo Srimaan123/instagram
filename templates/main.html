@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,63 +9,78 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap&family=Edu+NSW+ACT+Cursive:wght@400..700&display=swap&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap&family=Edu+NSW+ACT+Cursive:wght@400..700&display=swap&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+        integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <style>
         @media (min-width:500px) {
-            .main{
+            .main {
                 display: grid;
-                grid-template-columns: 1fr  10fr;
+                grid-template-columns: 1fr 10fr;
                 grid-template-rows: 1fr 10fr;
-                grid-template-areas: 
-                "navigation content"
-                "navigation content";
+                grid-template-areas:
+                    "navigation content"
+                    "navigation content";
                 grid-column-gap: 48px;
             }
-            .header{
+
+            .header {
                 display: none;
             }
-            .content{
+
+            .content {
                 grid-area: content;
             }
-            .navigation{
+
+            .navigation {
                 grid-area: navigation;
             }
         }
+
         @media (max-width: 500px) {
-            .main{
+            .main {
                 display: flex;
                 flex-wrap: wrap;
                 flex-direction: column;
             }
-            .navigation{
+
+            .navigation {
                 display: flex;
                 flex-direction: row;
                 padding: 1rem;
             }
-            .hide{
+
+            .hide {
                 display: none;
             }
-            .icons{
+
+            .icons {
                 flex-direction: row;
                 flex-grow: 1;
                 justify-content: space-evenly;
             }
-            .content{
+
+            .content {
                 padding: 1rem;
                 flex-grow: 1;
             }
-            .navigation{
+
+            .navigation {
                 display: flex;
             }
-            .icon{
+
+            .icon {
                 display: none;
             }
         }
-        .before{
+
+        .before {
             z-index: -1;
             isolation: isolate;
-            background: linear-gradient(45deg,#f9ce34,#ee2a7b,#6228d7);
+            background: linear-gradient(45deg, #f9ce34, #ee2a7b, #6228d7);
             width: 88px;
             height: 88px;
             position: absolute;
@@ -75,19 +91,22 @@
     </style>
     <link rel="stylesheet" href="../static/styles.css">
 </head>
+
 <body>
     <p style="display: none;" id="username">{{ username }}</p>
     <div class="main w-full min-h-dvh bg-[var(--bg-color)]">
         <div class="header p-2 border-b-2 border-gray-200 flex items-center justify-between">
             <i class="fab fa-instagram text-3xl"></i>
-            <i class="fas fa-heart text-2xl text-red-400 hover:text-red-300" onclick="window.location.href = `/notifications/${document.querySelector('#username').textContent}`"></i>
+            <i class="fas fa-heart text-2xl text-red-400 hover:text-red-300"
+                onclick="window.location.href = `/notifications/${document.querySelector('#username').textContent}`"></i>
         </div>
-        
+
         <div class="content p-4">
             <div class="stories">
                 <div class="story z-[1] relative flex inline-block">
-                    
-                    <img src="#" alt="" class="border-6 border-[var(--bg-color)] relative w-[length:var(--story)] h-[length:var(--story)] rounded-full bg-red-500">
+
+                    <img src="#" alt=""
+                        class="border-6 border-[var(--bg-color)] relative w-[length:var(--story)] h-[length:var(--story)] rounded-full bg-red-500">
                     <div class="before"></div>
                 </div>
             </div>
@@ -97,18 +116,25 @@
                 <i class="fab fa-instagram text-5xl"></i>
             </div>
             <div class="icons flex flex-col gap-4 pl-4 pr-4">
-                <i class="hide fas fa-heart text-red-400 text-2xl" onclick="window.location.href = `/notifications/${document.querySelector('#username').textContent}`"></i>
-                <i class="fas fa-home text-2xl"></i>
+                <i class="hide fas fa-heart text-red-400 text-2xl"
+                    onclick="window.location.href = `/notifications/${document.querySelector('#username').textContent}`"></i>
+                <i class="fas fa-home text-2xl"
+                    onclick="window.location.href = `/main/${document.querySelector('#username').textContent}`"></i>
                 <i class="far fa-plus text-2xl"></i>
-                <i class="fas fa-paper-plane text-2xl"></i>
+                <i class="fas fa-paper-plane text-2xl"
+                    onclick="window.location.href = `/accounts/${document.querySelector('#username').textContent}`"></i>
+
                 <i class="fas fa-search text-2xl"
-                onclick="window.location.href = `/search/${document.querySelector('#username').textContent}`"></i>
+                    onclick="window.location.href = `/search/${document.querySelector('#username').textContent}`"></i>
             </div>
             <div class="hide grow flex flex-col justify-end gap-4 pb-4">
                 <i class="fas fa-bars text-2xl"></i>
-                <img src="https://images.macrumors.com/t/n4CqVR2eujJL-GkUPhv1oao_PmI=/1600x/article-new/2019/04/guest-user-250x250.jpg" class="w-6 rounded-full" onclick="window.location.href = `/settings/${document.querySelector('#username').textContent}`">
+                <img src="https://images.macrumors.com/t/n4CqVR2eujJL-GkUPhv1oao_PmI=/1600x/article-new/2019/04/guest-user-250x250.jpg"
+                    class="w-6 rounded-full"
+                    onclick="window.location.href = `/settings/${document.querySelector('#username').textContent}`">
             </div>
         </div>
     </div>
 </body>
+
 </html>

@@ -24,4 +24,15 @@ def init_db():
 			is_seen text) 
 		""")
 
+		cursor.execute("""
+		create table if not exists chats(
+		id TEXT,
+		message TEXT,
+		sender TEXT,
+		receiver TEXT,
+		is_seen TEXT,
+		is_deleted TEXT
+		)
+		""")
+
 		conn.commit()
