@@ -26,7 +26,7 @@ def init_db():
 
 		cursor.execute("""
 		create table if not exists chats(
-		id TEXT,
+		id INTEGER PRIMARY KEY AUTOINCREMENT,
 		message TEXT,
 		sender TEXT,
 		receiver TEXT,

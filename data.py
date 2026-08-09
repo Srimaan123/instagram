@@ -1,7 +1,7 @@
 import sqlite3 
 conn = sqlite3.connect("data.db")
 cursor = conn.cursor()
-cursor.execute("drop table requests")
+cursor.execute("drop table chats")
 '''cursor.execute("""
 create table if not exists users(
 id integer primary key autoincrement,

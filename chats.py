@@ -1,5 +1,5 @@
 from flask import render_template,redirect,url_for,request,Blueprint
-from flask_socketio import emit
+from flask_socketio import emit,join_room
 import sqlite3
 
 chats_bp = Blueprint("chat",__name__)
@@ -24,7 +24,12 @@ def accounts(username):
 @chats_bp.route("/chat/<code>")
 def show_chats(code):
     sender,receiver = code.split("-")
-    return render_template("chat.html",sender=sender,receiver=receiver)
+    with sqlite3.connect("data.db") as conn:
+        cur = conn.cursor()
+        sender_id = cur.execute("select id from users where username=?",(sender,)).fetchone()[0]
+        receiver_id = cur.execute("select id from users where username=?",(receiver,)).fetchone()[0]
+
+    return render_template("chat.html",sender=sender,receiver=receiver,sender_id=sender_id,receiver_id=receiver_id)
 
 def chats_api(socketio):
     @socketio.on("search_account")
@@ -45,4 +50,30 @@ def chats_api(socketio):
                     if i == j[2]:
                         similar_users.append(j[2])
             emit("search_account_result",{"users": similar_users})
+    @socketio.on("join-room")
+    def join_the_room(data):
+        print("hiiii")
+        sender_id = int(data.get("sender_id"))
+        receiver_id = int(data.get("receiver_id"))
+        room_code = f'{max(sender_id,receiver_id)}-{min(sender_id,receiver_id)}'
+        join_room(room=room_code)
+        emit("room_joined",room=room_code)
+        print("JOINED THE ROOM")
 
+    @socketio.on("send_message")
+    def send_the_message_and_store(data):
+        sender = data['sender']
+        receiver = data['receiver']
+        room_id = data['room_id']
+        message = data['message']
+
+        with sqlite3.connect("data.db") as conn:
+            cursor = conn.cursor()
+            cursor.execute("insert into chats(id,message,sender,receiver,is_seen,is_deleted) values(?,?,?,?,'False','False')",(message,sender,receiver))
+            conn.commit()
+
+        emit("receive_message",{
+            "message": message,
+            "sender": sender,
+            "room_id": room_id
+        },room=room_id)
