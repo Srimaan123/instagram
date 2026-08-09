@@ -58,7 +58,7 @@ def chats_api(socketio):
         receiver_id = int(data.get("receiver_id"))
         room_code = f'{max(sender_id,receiver_id)}-{min(sender_id,receiver_id)}'
         join_room(room=room_code)
-        emit("room_joined",room=room_code)
+        emit("room_joined",{"room_code": room_code},room=room_code)
 
 
     @socketio.on("send_message")

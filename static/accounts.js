@@ -29,6 +29,14 @@ socketio.on("search_account_result", (data) => {
     }
 })
 
+let iframe = document.querySelector(".iframe-holder")
+if (document.documentElement.clientWidth < 500) {
+    iframe.style.display = 'none';
+    document.querySelector(".screen").classList.add("w-full")
+    document.querySelector(".screen").classList.remove("w-5/12")
+
+}
+
 accounts.forEach(account => {
 
     account.addEventListener("click", () => {
