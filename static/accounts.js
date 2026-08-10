@@ -30,7 +30,7 @@ socketio.on("search_account_result", (data) => {
 })
 
 let iframe = document.querySelector(".iframe-holder")
-if (document.documentElement.clientWidth < 500) {
+if (document.documentElement.clientWidth < 800) {
     iframe.style.display = 'none';
     document.querySelector(".screen").classList.add("w-full")
     document.querySelector(".screen").classList.remove("w-5/12")
@@ -40,7 +40,7 @@ if (document.documentElement.clientWidth < 500) {
 accounts.forEach(account => {
 
     account.addEventListener("click", () => {
-        if (document.documentElement.clientWidth > 500) {
+        if (document.documentElement.clientWidth > 800) {
             let iframe = document.querySelector(".iframe-holder")
             iframe.style.display = 'flex'
             let iframe1 = document.querySelector(".iframe")

@@ -9,7 +9,7 @@ from notifications import notifications_bp,notifications_api
 from settings import settings_bp,settings_api
 from chats import chats_bp,chats_api
 
-socketio = SocketIO(app)
+socketio = SocketIO(app,cors_allowed_origins="*")
 init_db()
 app.register_blueprint(auth_bp)
 app.register_blueprint(main_bp)

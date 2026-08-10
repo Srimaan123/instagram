@@ -30,17 +30,21 @@ sendBtn.addEventListener("click", () => {
 function add_message(text, sender) {
     let div = document.createElement("div")
     let p = document.createElement("p")
+    let wrap = document.createElement("div")
     if (document.querySelector("#sender").textContent == sender) {
-        div.setAttribute("class", "bg-[var(--chat-bubble)] rounded-full p-2 w-6/12 self-end")
+        div.setAttribute("class", "bg-[var(--chat-bubble)] rounded-tr-xl rounded-tl-full rounded-br-full rounded-bl-full p-2 w-6/12 self-end")
         p.setAttribute("class", "text-white font-[500]")
+        wrap.setAttribute("class","flex justify-end")
     }
     else {
-        div.setAttribute("class", "bg-gray-200 rounded-full p-2 w-6/12 self-end")
-        p.setAttribute("class", "text-white font-[500] ")
+        div.setAttribute("class", "bg-gray-200 rounded-tl-xl rounded-tr-full rounded-br-full rounded-bl-full p-2 w-6/12")
+        p.setAttribute("class", "text-black font-[500] ")
+        wrap.setAttribute("class","flex")
     }
     p.textContent = text
     div.append(p)
-    content.append(div)
+    wrap.append(div)
+    content.append(wrap)
 }
 
 socketio.on("receive_message", (data) => {

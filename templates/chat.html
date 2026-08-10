@@ -21,7 +21,11 @@
     <link rel="stylesheet" href="../static/styles.css">
     <link rel="stylesheet" href="../static/dist/output.css">
     <link rel="stylesheet" href="../static/fontawesome-free-7.3.1-web/css/all.min.css">
-    <script src="../static/socketio.js"></script>
+    <style>
+        .content{
+            overflow-y: auto;
+        }
+    </style>
 </head>
 
 <body>
@@ -46,16 +50,16 @@
             {% for chat in chats %}
             {% if sender == chat[2] %}
             <div class="wrap flex justify-end">
-                <div class="message bg-[var(--chat-bubble)] rounded-full p-2 w-6/12">
+                <div class="message bg-[var(--chat-bubble)] rounded-tr-xl rounded-tl-full rounded-br-full rounded-bl-full p-2 w-6/12">
                     <p class="id" style="display: none;">{{ chat[0] }}</p>
                     <p class="text-white font-[500]">{{ chat[1] }}</p>
                 </div>
             </div>
             {% else %}
             <div class="wrap flex">
-                <div class="message bg-gray-200 rounded-full p-2 w-6/12">
+                <div class="message bg-gray-200 rounded-tr-full rounded-br-full rounded-bl-full rounded-tl-xl p-2 w-6/12">
                     <p class="id" style="display: none;">{{ chat[0] }}</p>
-                    <p class="text-white font-[500]">{{ chat[1] }}</p>
+                    <p class="text-black font-[500]">{{ chat[1] }}</p>
                 </div>
             </div>
             {% endif %}
