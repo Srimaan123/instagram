@@ -40,12 +40,14 @@ if (document.documentElement.clientWidth < 800) {
 accounts.forEach(account => {
 
     account.addEventListener("click", () => {
+        account.querySelector(".new_badge").style.display = 'none'
         if (document.documentElement.clientWidth > 800) {
             let iframe = document.querySelector(".iframe-holder")
             iframe.style.display = 'flex'
             let iframe1 = document.querySelector(".iframe")
             iframe1.setAttribute("src", `/chat/${username}-${account.querySelector(".name").textContent}`)
         }
+        
         else {
             window.location.href = `/chat/${username}-${account.querySelector(".name").textContent}`
         }
@@ -53,4 +55,20 @@ accounts.forEach(account => {
     })
 
 
+})
+
+window.addEventListener("DOMContentLoaded",()=>{
+    console.log("asd")
+    socketio.emit("check_new_messages",{"username": username})
+})
+
+socketio.on("new_messages_arrived",(data)=>{
+    
+    let senders = data.senders
+    senders.forEach(sender=>{
+        let account = document.querySelector(`#${sender}`)
+        let newBadge = document.querySelector(".new_badge")
+        newBadge.style.display = 'flex'
+
+    })
 })

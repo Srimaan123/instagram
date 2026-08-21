@@ -57,7 +57,7 @@
             </div>
             {% else %}
             <div class="wrap flex">
-                <div class="message bg-gray-200 rounded-tr-full rounded-br-full rounded-bl-full rounded-tl-xl p-2 w-6/12">
+                <div id="received_message" class="message bg-gray-200 rounded-tr-full rounded-br-full rounded-bl-full rounded-tl-xl p-2 w-6/12">
                     <p class="id" style="display: none;">{{ chat[0] }}</p>
                     <p class="text-black font-[500]">{{ chat[1] }}</p>
                 </div>
@@ -69,10 +69,10 @@
 
             <input type="text" name="send" id="input" placeholder="Enter message ..."
                 class="rounded-full border border-gray-300 w-full p-3 placeholder-gray-500 font-md">
-            <div
+            <button
                 class="sendBtn flex justify-center items-center p-2 rounded-full bg-[var(--chat-bubble)] h-full aspect-[2/1.5]">
                 <i class="fas fa-paper-plane bg-[var(--chat-bubble)] text-white text-2xl"></i>
-            </div>
+            </button>
         </div>
     </div>
     <script src="../static/chat.js"></script>

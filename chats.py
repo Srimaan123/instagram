@@ -29,7 +29,6 @@ def show_chats(code):
         sender_id = cur.execute("select id from users where username=?",(sender,)).fetchone()[0]
         receiver_id = cur.execute("select id from users where username=?",(receiver,)).fetchone()[0]
         chats = cur.execute("select * from chats where (sender=? and receiver=?) or (sender=? and receiver=?)",(sender,receiver,receiver,sender)).fetchall()
-        print(chats)
     return render_template("chat.html",sender=sender,receiver=receiver,sender_id=sender_id,receiver_id=receiver_id,chats=chats)
 
 def chats_api(socketio):
@@ -53,7 +52,6 @@ def chats_api(socketio):
             emit("search_account_result",{"users": similar_users})
     @socketio.on("join-room")
     def join_the_room(data):
-        print("hiiii")
         sender_id = int(data.get("sender_id"))
         receiver_id = int(data.get("receiver_id"))
         room_code = f'{max(sender_id,receiver_id)}-{min(sender_id,receiver_id)}'
@@ -72,9 +70,30 @@ def chats_api(socketio):
             cursor = conn.cursor()
             cursor.execute("insert into chats(message,sender,receiver,is_seen,is_deleted) values(?,?,?,'False','False')",(message,sender,receiver))
             conn.commit()
+            id = cursor.execute("select id from chats where sender=? and receiver=? and message=?",(sender,receiver,message)).fetchone()[0]
 
         emit("receive_message",{
             "message": message,
+            "message_id": id,
             "sender": sender,
             "room_id": room_id
         },room=room_id)
+    
+    @socketio.on("set_read")
+    def set_read_messages(data):
+        message_ids = data["message_id"]
+        with sqlite3.connect("data.db") as conn:
+            cursor = conn.cursor()
+            for i in message_ids:
+                cursor.execute("update chats set is_seen='True' where id=?",(i,))
+            conn.commit()
+    
+    @socketio.on("check_new_messages")
+    def check_whether_new_messages_are_there(data):
+        username = data["username"]
+        with sqlite3.connect("data.db") as conn:
+            cursor = conn.cursor()
+            usernames = cursor.execute("select sender from chats where is_seen='False' and receiver=?",(username,)).fetchall()
+        usernames = [i[0] for i in usernames]
+            
+        emit("new_messages_arrived",{"senders":usernames})

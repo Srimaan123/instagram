@@ -2,6 +2,8 @@ let socketio = io();
 let main = document.querySelector(".main")
 let content = document.querySelector(".content")
 
+content.scrollBy(0,content.scrollHeight)
+
 socketio.on("connect", () => {
     console.log("connected!!")
 
@@ -19,12 +21,16 @@ socketio.on("joined_room", (data) => {
 let sendBtn = document.querySelector(".sendBtn")
 let input = document.querySelector("#input")
 sendBtn.addEventListener("click", () => {
-    socketio.emit("send_message", {
-        sender: document.querySelector("#sender").textContent,
-        receiver: document.querySelector("#receiver").textContent,
-        "message": document.querySelector("#input").value,
-        "room_id": document.querySelector("#room_id").textContent
-    })
+    
+    if (input.value !== ""){
+        socketio.emit("send_message", {
+            sender: document.querySelector("#sender").textContent,
+            receiver: document.querySelector("#receiver").textContent,
+            "message": document.querySelector("#input").value,
+            "room_id": document.querySelector("#room_id").textContent
+        })
+        input.value = ""
+    }
 })
 
 function add_message(text, sender) {
@@ -49,4 +55,19 @@ function add_message(text, sender) {
 
 socketio.on("receive_message", (data) => {
     add_message(data.message, data.sender)
+    content.scrollBy(0,content.scrollHeight)
+    socketio.emit("set_read",{"message_id": data.message_id})
+})
+
+window.addEventListener("DOMContentLoaded",()=>{
+    let receivedMessages = document.querySelectorAll("#received_message")
+    let messageId = []
+    receivedMessages.forEach(message=>{
+        messageId.push(message.querySelector(".id").textContent)
+    })
+    
+    socketio.emit("set_read",{"message_id": messageId})
+})
+socketio.on("set_read_completed",(data)=>{
+    console.log(data.messages)
 })
