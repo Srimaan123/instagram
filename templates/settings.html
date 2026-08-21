@@ -62,9 +62,15 @@
                 username }}</h1>
         </div>
         <div class="content p-4">
-            <div class="profile border-2 border-gray-200 rounded-2xl p-4 flex gap-2">
+            <div class="profile border-2 border-gray-200 rounded-2xl p-4 flex gap-2 reiative">
                 <img src="https://images.macrumors.com/t/n4CqVR2eujJL-GkUPhv1oao_PmI=/1600x/article-new/2019/04/guest-user-250x250.jpg"
                     alt="" class="profilepic w-[length:var(--story)] h-[length:var(--story)] rounded-full ">
+                
+                    <form style="display: none;" action="/change_profile_pic/{{ username }}" enctype="multipart/form-data" method='post' class="flex flex-col gap-4 change-div absolute bg-white p-4 rounded-xl">
+                        <input class="border-1 border-gray-200 p-2 rounded-xl" type="file" name="">
+                        <button class="border-1 border-gray-200 rounded-xl p-2 bg-[var(--insta-blue)] text-white">Change</button>
+                    </form>
+                
                 <div class="text1 flex flex-col justify-center items-center">
                     <p class="text-xl">{{ followers }}</p>
                     <p class="text-xl font-bold">followers</p>

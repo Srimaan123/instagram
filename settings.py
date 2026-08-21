@@ -4,22 +4,26 @@ from flask_socketio import emit
 
 settings_bp = Blueprint("settings",__name__)
 
-@settings_bp.route("/settings/<username>")
+@settings_bp.route("/settings/<username>",methods=['POST',"GET"])
 def settings(username):
-    with sqlite3.connect("data.db") as conn:
-        cursor = conn.cursor()
-        is_private = cursor.execute("select is_private from users where username=?",(username,)).fetchone()[0]
-        followers = len(cursor.execute("select id from requests where requested_to=? and is_accepted='True'",(username,)).fetchall())
-        following = len(cursor.execute("select id from requests where requested_by=? and is_accepted='True'",(username,)).fetchall())
-    accountType = []
-    if is_private == 'True':
-        accountType.append('Private')
-        accountType.append('Public')
+    if request.method == "POST":
+        pass
     else:
-        accountType.append('Public')
-        accountType.append('Private')
-        
-    return render_template("settings.html",following=following,username=username,accountType=accountType,followers=followers)
+        with sqlite3.connect("data.db") as conn:
+            cursor = conn.cursor()
+            is_private = cursor.execute("select is_private from users where username=?",(username,)).fetchone()[0]
+            followers = len(cursor.execute("select id from requests where requested_to=? and is_accepted='True'",(username,)).fetchall())
+            following = len(cursor.execute("select id from requests where requested_by=? and is_accepted='True'",(username,)).fetchall())
+        accountType = []
+        if is_private == 'True':
+            accountType.append('Private')
+            accountType.append('Public')
+        else:
+            accountType.append('Public')
+            accountType.append('Private')
+            
+        return render_template("settings.html",following=following,username=username,accountType=accountType,followers=followers)
+
 
 def settings_api(socketio):
     @socketio.on("changeAccountType")
